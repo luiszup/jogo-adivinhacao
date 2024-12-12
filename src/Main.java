@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,8 +10,8 @@ public class Main {
         int tentativas = 5;
         int contador = 5;
         int pontos = 0;
-        int acertos = 0;
-        int erros = 0;
+        ArrayList<Integer> numerosAcertados = new ArrayList<>();
+        ArrayList<Integer> numerosErrados = new ArrayList<>();
 
         System.out.println("--------Bem vindo(a) ao jogo de adivinhação!--------");
         System.out.println("Escolha sua dificuldade do jogo:");
@@ -48,11 +49,11 @@ public class Main {
                     System.out.println("--------VOCÊ ACERTOU!!--------");
                     System.out.println("O número era " + numeroAleatorio);
                     pontos += 100;
-                    acertos++;
+                    numerosAcertados.add(numero);
                     break;
                 } else {
+                    numerosErrados.add(numero);
                     contador--;
-                    erros ++;
                     System.out.println("Você tem mais " + contador + " chances para acertar");
 
                     if (numero > numeroAleatorio) {
@@ -77,7 +78,7 @@ public class Main {
         }
         System.out.println("--------RESULTADO FINAL--------");
         System.out.println("Pontos: " + pontos);
-        System.out.println("Acertos: " + acertos);
-        System.out.println("Erros: " + erros);
+        System.out.println("Números acertados: " + numerosAcertados);
+        System.out.println("Números errados: " + numerosErrados);
     }
 }
