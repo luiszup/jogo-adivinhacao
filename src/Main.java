@@ -43,34 +43,45 @@ public class Main {
 
             for (int i = 0; i < tentativas; i++) {
                 System.out.println("Dê seu palpite: ");
-                int numero = input.nextInt();
+                int numero = 0;
+                while (true) {
+                    try {
+                        numero = input.nextInt();
 
-                if (numero > limite || numero < 1) {
-                    System.out.println("O número digitado deve ser entre 1 e " + limite + "!");
-                } else {
-                    if (numero == numeroAleatorio) {
-                        System.out.println("--------VOCÊ ACERTOU!!--------");
-                        System.out.println("O número era " + numeroAleatorio);
-                        pontos += 100;
-                        numerosAcertados.add(numero);
-                        break;
-                    } else {
-                        numerosErrados.add(numero);
-                        contador--;
-                        pontos -= 50;
-                        System.out.println("Perdeu 50 pontos...");
-                        System.out.println("Você tem mais " + contador + " chances para acertar");
-
-                        if (numero > numeroAleatorio) {
-                            System.out.println("O número digitado é maior que o número sorteado");
+                        if (numero > limite || numero < 1) {
+                            System.out.println("O número digitado deve ser entre 1 e " + limite + "!");
                         } else {
-                            if (numero == numeroAleatorio - 1) {
-                                System.out.println("Quase lá! Você estava a 1 número de distância do número sorteado. Você ganhou 25 pontos");
-                                pontos += 25;
-                            } else {
-                                System.out.println("O número digitado é menor que o número sorteado");
-                            }
+                            break;
                         }
+                    } catch (Exception e) {
+                        System.out.println("Entrada inválida! Por favor, digite um número inteiro.");
+                        input.next();
+                    }
+                }
+
+                if (numero == numeroAleatorio) {
+                    System.out.println("--------VOCÊ ACERTOU!!--------");
+                    System.out.println("O número era " + numeroAleatorio);
+                    pontos += 100;
+                    numerosAcertados.add(numero);
+                    break;
+                } else {
+                    numerosErrados.add(numero);
+                    contador--;
+                    pontos -= 50;
+                    System.out.println("Perdeu 50 pontos...");
+                    System.out.println("Você tem mais " + contador + " chances para acertar");
+
+                    if (numero > numeroAleatorio) {
+                        System.out.println("O número digitado é maior que o número sorteado");
+                    } else {
+                        if (numero == numeroAleatorio - 1) {
+                            System.out.println("Quase lá! Você estava a 1 número de distância do número sorteado. Você ganhou 25 pontos");
+                            pontos += 25;
+                        } else {
+                            System.out.println("O número digitado é menor que o número sorteado");
+                        }
+                    }
 
                         if (contador == 0) {
                             System.out.println("--------VOCÊ PERDEU--------");
@@ -80,7 +91,6 @@ public class Main {
                         }
                     }
                 }
-            }
             System.out.println("--------RESULTADO FINAL--------");
             System.out.println("Pontos: " + pontos);
             System.out.println("Números acertados: " + numerosAcertados);
